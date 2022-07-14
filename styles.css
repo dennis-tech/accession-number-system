@@ -1,0 +1,74 @@
+body {
+    margin: 0px;
+    background-image: url(/\ bckg.jpg);
+}
+
+button {
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    align-self: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #04AA6D;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #1F2937;
+  }
+button:hover {
+    background-color: #1eb6a2
+}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 30px;
+    color: #070707;
+}
+h2 {
+    font-weight: 900;
+    font-size: 35px;
+    line-height: 20px;
+    color: 	#8000ff;
+}
+#pers {
+    border: 2px solid #00a870;
+    background-color: #f6bd60;
+    color: white;
+    font-family: 'Karla';
+    font-style: normal;
+    width: auto;  
+    height:auto;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+.header {
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+#select, #person, #assignto, #assignfrom, input, label {
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 10px;
+    margin: 5px 5px;
+}
+.report {
+    display: flexbox;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: inherit;
+    color: antiquewhite;
+}

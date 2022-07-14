@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCESSION NUMBER GENERATOR</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+        
+    <div class="person" id="pers">
+        <!-- header -->
+        <div class="header">
+            <header>
+                <h1>NATIONAL MUSEUMS OF KENYA</h1>
+                <h2>Paleontology Section</h2>
+                <h3>ACCESSION NUMBER GENERATOR</h3>
+            </header>
+        </div>
+        
+        <label>Select Person</label>
+            <select id="person" > 
+                    <option value="--Select Person--">--Select Person--</option>
+                    <option value="Rose">Rose</option>
+                    <option value="Francis">Francis</option>
+                    <option value="Pauline">Pauline</option>
+                    <option value="Tom">Tom</option>
+                    <option value="Dr. Manthi">Dr. Manthi</option>
+                    <option value="Ileny">Ileny</option>
+                    <option value="Cecilia">Cecilia</option>
+                    <option value="Justus">Justus</option>
+            </select>
+            
+            <div class="assign">
+                <div class="assignfrom">
+                    <label for="assignfrom">Assign from number</label>
+                    <input type="number" placeholder="From number" id="assignfrom" min="200">
+                </div>
+                <!-- <div class="assignto">
+                    <label for="assignto">Assign to number</label>
+                    <input type="number" placeholder="To number"id="assignto" min="0">
+                </div> -->
+    </div>
+           <button type="assign"  id="assign-btn" onclick="assignPerson (); issueNo (); report_p (); ">Assign</button> 
+           <section class="report">
+               <h4>REPORT OF PREVIOUSLY ASSIGNED NUMBERS</h4>
+            <p id="report">
+                <ol>
+
+                </ol>
+            </p>
+        </section>
+    </div>
+    
+<script src="/main.js"></script>    
+</body>
+</html>
