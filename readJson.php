@@ -8,6 +8,10 @@
     // print_r($data);
     // echo $data[0];
     $selectedPerson = $data[0];
+
+ $data = explode (",", $_GET['arruy']);
+        $selectedPerson = $data[0];
+
     $fromNo = $data[1];
     $toNo = $data[2];
     $currenttime = time();
@@ -19,6 +23,7 @@
     $fetchresult = mysqli_query($conn, $fetchsql);
     $row = mysqli_fetch_array($fetchresult);
     $lastnumber= $row["numbers_to"];
+
     mysqli_close($conn);
  }
     // if(file_exists("data.json")) {
@@ -28,9 +33,6 @@
     //     file_put_contents("./js/data.json", $json);
     // }
     
-    // mysqli_close($conn);// close
-    // mysqli_free_result($fetchresult);
-    
-    // echo "lastnumber", $lastnumber;
 
+   
 ?>
