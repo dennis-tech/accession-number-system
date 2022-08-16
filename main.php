@@ -60,13 +60,13 @@ if (!isset($_SESSION['username'])) {
             let dateOptions = { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' };
             let leo = new Date();
             let today = leo.toLocaleDateString('en-US', dateOptions);
-            var javar = <?=$lastnumber?>;
-            console.log(javar);
+            // var javar =                              //<'?=$lastnumber?'>;
+            console.log(javari);
             let saveBtn = document.getElementById("save-btn");
             let totalCalc = {
             calcNumber: 100,
             currentNumber: javar
-            }
+            };
 
             let generatedRepo = "";
             let numberReport = document.getElementById("number");

@@ -1,7 +1,8 @@
 <?php 
  require_once "config.php";// open connection
  date_default_timezone_set('Africa/Nairobi');
- $data = explode (",", $_GET['arruy']);
+ if(isset($_GET['arruy'])){
+    $data = explode (",", $_GET['arruy']);
     // $data = ($_GET);
     // $name = array_values($data);
     // print_r($data);
@@ -18,6 +19,8 @@
     $fetchresult = mysqli_query($conn, $fetchsql);
     $row = mysqli_fetch_array($fetchresult);
     $lastnumber= $row["numbers_to"];
+    mysqli_close($conn);
+ }
     // if(file_exists("data.json")) {
         
     //     $jsonarray [] = $row;
