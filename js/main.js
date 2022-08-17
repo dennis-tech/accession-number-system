@@ -2,13 +2,13 @@ let dateOptions = { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numer
 let leo = new Date();
 let today = leo.toLocaleDateString('en-US', dateOptions);
 
-// window.location.href = "main.php?wiwi";
-
+let lastNumber = '<?=$lastnumber?>';
+let saveBtn = document.getElementById("save-btn");
 let totalCalc = {
   calcNumber: 100,
-  currentNumber: 79901
+  currentNumber: lastNumber
 }
-// console.log(totalCalc.coolValue.value);
+
 let generatedRepo = "";
 let numberReport = document.getElementById("number");
 let total = totalCalc.currentNumber  + totalCalc.calcNumber; 
@@ -25,10 +25,23 @@ function generateNo () {
       numberReport.innerHTML = generatedRepo;
     }
 }
-function saveNo() {
-  let selectedValue = document.getElementById("person").value;
+
+saveBtn.addEventListener("click",function () {
+      let selectedValue = document.getElementById("person").value;
+      let arruy = [selectedValue, totalCalc.currentNumber, total];
+      if (selectedValue === "--Select Person--") {
+        alert ("You have not selected any person to assign to!");
   
-}
+      } else {
+      let src1 = "readJson.php?arruy=" + arruy[0] + "," + arruy[1]  + "," + arruy[2];
+      window.location.href = src1;
+      }
+  
+})
+
+
+
+
 
 
 
