@@ -29,12 +29,7 @@ if (!isset($_SESSION['username'])) {
           $json = json_encode($jsonarray);
           file_put_contents("./js/data.json", $json);
       }
-      else {
-          $jsonarray [] = $result;
-          $json = json_encode($jsonarray);
-          file_put_contents("./js/data.json", $json);
-      }
-    mysqli_close($conn);// close connection
+
 }
 
 ?>
@@ -55,7 +50,7 @@ if (!isset($_SESSION['username'])) {
         <!-- header -->
         <div class="header">
             <header>
-                <img class="logo" src="download.jpeg" alt="national museums of kenya logo">
+                <img class="logo" src="nmk-logo.png" alt="national museums of kenya logo">
                 <h1>NATIONAL MUSEUMS OF KENYA</h1>
                 <h2>Paleontology Section</h2>
                 <h3>ACCESSION CARD SYSTEM</h3>
@@ -87,7 +82,7 @@ if (!isset($_SESSION['username'])) {
               </div>         
             </div>
             <!-- paragraph report -->
-            <p id="number"><br></p>
+            <p id="accession-report"><br></p>
 
             <!-- logout btn -->
     <button class= "btn-btn"> <a href="logout.php">Log out</a> </button> 
@@ -102,13 +97,13 @@ if (!isset($_SESSION['username'])) {
         let today = leo.toLocaleDateString('en-US', dateOptions);
         let saveBtn = document.getElementById("save-btn");
         let totalCalc = {
-          currentNumber: parseInt(lastNo),
+          currentNumber: parseInt(lastNo),//79901,
           calcNumber: 100
           
         }
 
         let generatedRepo = "";
-        let numberReport = document.getElementById("number");
+        let numberReport = document.getElementById("accession-report");
         let total = totalCalc.currentNumber + totalCalc.calcNumber; 
         function generateNo() {
             let selectedValue = document.getElementById("person").value; 

@@ -9,11 +9,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
+    background-color: #cccccc;
     height:auto;
     width: 900px;
 }
-#number {
+p {
     padding-left: 10px;
     border: 2px solid rgba(191,111,75,255);
     width: 1000px;
