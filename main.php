@@ -1,3 +1,4 @@
+<!-- PHP -->
 <?php 
 
 session_start();
@@ -28,20 +29,17 @@ if (!isset($_SESSION['username'])) {
           $json = json_encode($jsonarray);
           file_put_contents("./js/data.json", $json);
       }
-    mysqli_close($conn);// close
+      else {
+          $jsonarray [] = $result;
+          $json = json_encode($jsonarray);
+          file_put_contents("./js/data.json", $json);
+      }
+    mysqli_close($conn);// close connection
 }
-
-    // $dennis = "SELECT * FROM storedata";
-    // $dennisresult = mysqli_query($conn, $dennis);
-    // $dennisrow = mysqli_fetch_array($dennisresult);
-    // $dennisrowcount = mysqli_num_rows($dennisresult);
-    // $dennisrowcount = $dennisrowcount - 1;
-    
-
 
 ?>
 
-
+<!-- HTML -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -79,29 +77,39 @@ if (!isset($_SESSION['username'])) {
                             <option value="Justus">Justus</option>
                     </select>        
             </div>
-            <button  id = "generate" type="submit" onclick="generateNo ()">GENERATE</button>
-            <button type="submit" id="save-btn">SAVE</button>
+          <!-- buttons -->
+            <div class="btn">
+              <div>
+                <button  class= "btn-btn" type="submit" onclick="generateNo()">GENERATE</button>
+              </div>
+              <div>
+                <button type="submit" class= "btn-btn" id="save-btn">SAVE</button>
+              </div>         
+            </div>
+            <!-- paragraph report -->
             <p id="number"><br></p>
-            
-    <button id = "logout" > <a href="logout.php">Log out</a> </button> 
+
+            <!-- logout btn -->
+    <button class= "btn-btn"> <a href="logout.php">Log out</a> </button> 
       
     
-    <!-- src="main.js" -->
+    <!-- JAVASCRIPT -->
       <script>
-        var lastNomber = '<?=$lastnumber?>';
-        console.log(lastNomber.toLocaleString());
+        var lastNo = '<?=$lastnumber?>';
+        console.log(lastNo);
         let dateOptions = { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' };
         let leo = new Date();
         let today = leo.toLocaleDateString('en-US', dateOptions);
         let saveBtn = document.getElementById("save-btn");
         let totalCalc = {
-          calcNumber: 100,
-          currentNumber: 9000
+          currentNumber: parseInt(lastNo),
+          calcNumber: 100
+          
         }
 
         let generatedRepo = "";
         let numberReport = document.getElementById("number");
-        let total = totalCalc.currentNumber  + totalCalc.calcNumber; 
+        let total = totalCalc.currentNumber + totalCalc.calcNumber; 
         function generateNo() {
             let selectedValue = document.getElementById("person").value; 
             

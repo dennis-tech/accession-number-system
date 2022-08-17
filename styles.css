@@ -1,3 +1,4 @@
+/* ---MAIN.PHP--- */
 body {
     margin: 0;
     padding: 0;
@@ -57,30 +58,26 @@ select {
     margin-left: 5px;
     margin-bottom: 10px;
 }
-#generate {
+
+/* ---Buttons--- */
+.btn{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-between;
+}
+.btn-btn {
     background-color: #985e15;
     color: #fff;
     font-size: larger;
     border: 2px solid #cccccc ;
-    border-radius: 5px;
-    
+    border-radius: 5px;    
 }
-#generate:hover {
+.btn-btn:hover {
     background-color:#fff;
     color:  #985e15;
 }
-#logout {
-    background-color: #985e15;
-    color: #fff;
-    font-size: larger;
-    border: 2px solid #cccccc;
-    border-radius: 5px;
-}
-#logout:hover {
-    background-color:#fff ;
-    color:  #985e15;
-    font-size: larger;
-}
+
 a {
     text-decoration: none;
     color: #fff;
