@@ -1,13 +1,14 @@
 <!-- PHP -->
 <?php 
-
 session_start();
 require_once "config.php";
+$fetchsql = "SELECT MAX(numbers_to) FROM storedata";
+$fetchresult = mysqli_query($conn, $fetchsql);
+$lastrow = mysqli_fetch_array($fetchresult);
 
-if (!isset($_SESSION['username'])) {
-    header("Location: index.php");
-}
-// open connection
+
+
+
  date_default_timezone_set('Africa/Nairobi');
     if(isset($_GET['arruy'])){
     $data = explode (",", $_GET['arruy']);
@@ -18,19 +19,16 @@ if (!isset($_SESSION['username'])) {
     $currentdate = date("Y - m - d h:i", $currenttime);
     $sql = "INSERT INTO `storedata`(`selected_person`, `numbers_from`, `numbers_to`, `date`) VALUES ('$selectedPerson', '$fromNo', '$toNo', '$currentdate' ) ";
     $result = mysqli_query($conn, $sql);
-    $last_id = mysqli_insert_id($conn);
-    $fetchsql = "SELECT * FROM storedata WHERE id= $last_id ";
-    $fetchresult = mysqli_query($conn, $fetchsql);
-    $row = mysqli_fetch_array($fetchresult);
-    $lastnumber= $row["numbers_to"];
-    if(file_exists("data.json")) {
-          
-          $jsonarray [] = $result;
-          $json = json_encode($jsonarray);
-          file_put_contents("./js/data.json", $json);
-      }
-
+    // adding $result to json file
+    $json = json_encode($result);
+    file_put_contents('./js/data.json', $json);
+    
+    $fetchsql = "SELECT MAX(numbers_to) FROM storedata";
+$fetchresult = mysqli_query($conn, $fetchsql);
+$lastrow = mysqli_fetch_array($fetchresult);
+  
 }
+
 
 ?>
 
@@ -63,11 +61,11 @@ if (!isset($_SESSION['username'])) {
                     <select id="person" > 
                             <option value="--Select Person--">--Select Person--</option>
                             <option value="Rose">Rose</option>
-                            <option value="Francis">Francis</option>
+                            <option value="Yattich">Francis</option>
                             <option value="Pauline">Pauline</option>
                             <option value="Tom">Tom</option>
-                            <option value="Dr. Manthi">Dr. Manthi</option>
-                            <option value="Ileny">Ileny</option>
+                            <option value="Faith">Dr. Manthi</option>
+                            <option value="Patrick Gitonga">Ileny</option>
                             <option value="Cecilia">Cecilia</option>
                             <option value="Justus">Justus</option>
                     </select>        
@@ -86,18 +84,25 @@ if (!isset($_SESSION['username'])) {
 
             <!-- logout btn -->
     <button class= "btn-btn"> <a href="logout.php">Log out</a> </button> 
-      
+  <div>
+    <?php
+ 
+    echo $lastrow[0];
+
+
+    ?>
+  </div>
     
     <!-- JAVASCRIPT -->
       <script>
-        var lastNo = '<?=$lastnumber?>';
-        console.log(lastNo);
+        //get $lastrow[0] from php
+        var lastrow = <?php echo $lastrow[0]; ?>;
         let dateOptions = { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' };
         let leo = new Date();
         let today = leo.toLocaleDateString('en-US', dateOptions);
         let saveBtn = document.getElementById("save-btn");
         let totalCalc = {
-          currentNumber: parseInt(lastNo),//79901,
+          currentNumber:parseInt(lastrow), 
           calcNumber: 100
           
         }
