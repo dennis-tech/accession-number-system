@@ -63,29 +63,29 @@ select {
 .btn{
     display: flex;
     flex-direction: row;
-    padding: 10px;
-    justify-content: space-between;
+}
+.btn-right{
+    margin-right: 20px;
 }
 .btn-btn {
     background-color: #985e15;
     color: #fff;
-    font-size: larger;
+    font-size: 20px;
     border: 2px solid #cccccc ;
     border-radius: 5px;    
 }
 .btn-btn:hover {
-    background-color:#fff;
+    background-color:#FBB02D;
     color:  #985e15;
 }
 
 a {
     text-decoration: none;
     color: #fff;
-    font-size: larger;
+    font-size: normal;
 }
 a:hover {
     color:#985e15;
-    font-size: larger;
 }
 .selectedperson {
     color: #f2a821;
@@ -98,4 +98,66 @@ a:hover {
     color: #0284c7;
     font-style: normal;
     font-kerning: auto;
+}
+/* ---tables--- */
+/* styling table to have beautiful lines and borders */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+tr:hover {background-color:#f5f5f5}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #ccc;
+}
+table tr th, table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+    vertical-align: top;
+}
+table tr th {
+    background: #f5f5f5;
+    background-color: #f2a821;
+    color: #fff;
+}
+
+table tr th:nth-child(even) {
+    background-color: #FBB02D;
+}
+table tr th:nth-child(odd) {
+    background-color: #F18F01;
+}
+.tabletr:nth-child(even) {
+    background-color: #048BA8;
+}
+.tabletr:nth-child(odd) {
+    background-color: #99C24D;
+}
+table tr:hover {
+    background-color: #ddd;
+}
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #f2a821;
+    color: #fff;
+}
+table td {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #f2f2f2;
+}
+table td:hover {
+    background-color: rgb(215, 37, 37);
 }

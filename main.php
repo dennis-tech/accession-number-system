@@ -5,6 +5,7 @@ require_once "config.php";
 $fetchsql = "SELECT MAX(numbers_to) FROM storedata";
 $fetchresult = mysqli_query($conn, $fetchsql);
 $lastrow = mysqli_fetch_array($fetchresult);
+$lastrow[0]++;
 
 
 
@@ -24,9 +25,9 @@ $lastrow = mysqli_fetch_array($fetchresult);
     file_put_contents('./js/data.json', $json);
     
     $fetchsql = "SELECT MAX(numbers_to) FROM storedata";
-$fetchresult = mysqli_query($conn, $fetchsql);
-$lastrow = mysqli_fetch_array($fetchresult);
-  
+    $fetchresult = mysqli_query($conn, $fetchsql);
+    $lastrow = mysqli_fetch_array($fetchresult);
+    header("Location: main.php");
 }
 
 
@@ -51,7 +52,7 @@ $lastrow = mysqli_fetch_array($fetchresult);
                 <img class="logo" src="nmk-logo.png" alt="national museums of kenya logo">
                 <h1>NATIONAL MUSEUMS OF KENYA</h1>
                 <h2>Paleontology Section</h2>
-                <h3>ACCESSION CARD SYSTEM</h3>
+                <h3>ACCESSION NUMBER SYSTEM</h3>
             </header>
         </div>
         <!-- select person -->
@@ -61,11 +62,11 @@ $lastrow = mysqli_fetch_array($fetchresult);
                     <select id="person" > 
                             <option value="--Select Person--">--Select Person--</option>
                             <option value="Rose">Rose</option>
-                            <option value="Yattich">Francis</option>
+                            <option value="Yattich">Yattich</option>
                             <option value="Pauline">Pauline</option>
                             <option value="Tom">Tom</option>
-                            <option value="Faith">Dr. Manthi</option>
-                            <option value="Patrick Gitonga">Ileny</option>
+                            <option value="Faith">Faith</option>
+                            <option value="Patrick Gitonga">Patrick Gitonga</option>
                             <option value="Cecilia">Cecilia</option>
                             <option value="Justus">Justus</option>
                     </select>        
@@ -73,25 +74,28 @@ $lastrow = mysqli_fetch_array($fetchresult);
           <!-- buttons -->
             <div class="btn">
               <div>
-                <button  class= "btn-btn" type="submit" onclick="generateNo()">GENERATE</button>
+                <button  class= "btn-btn btn-right" type="submit" onclick="generateNo()">GENERATE</button>
               </div>
               <div>
                 <button type="submit" class= "btn-btn" id="save-btn">SAVE</button>
               </div>         
             </div>
+            
             <!-- paragraph report -->
             <p id="accession-report"><br></p>
 
-            <!-- logout btn -->
-    <button class= "btn-btn"> <a href="logout.php">Log out</a> </button> 
-  <div>
-    <?php
- 
-    echo $lastrow[0];
+            <!-- logout/report btn -->
+            <div class="btn">
+              <div>
+                <button class="btn-btn btn-right" type="submit"><a href="report.php">VIEW REPORT</a></button>
+              </div>
 
+              <div>
+                <button class= "btn-btn" type="submit"> <a href="logout.php">LOG OUT</a> </button> 
+              </div>
 
-    ?>
-  </div>
+            </div>
+   
     
     <!-- JAVASCRIPT -->
       <script>
@@ -103,8 +107,7 @@ $lastrow = mysqli_fetch_array($fetchresult);
         let saveBtn = document.getElementById("save-btn");
         let totalCalc = {
           currentNumber:parseInt(lastrow), 
-          calcNumber: 100
-          
+          calcNumber: 100          
         }
 
         let generatedRepo = "";
