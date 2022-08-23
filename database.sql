@@ -49,6 +49,8 @@ CREATE TABLE `storedata` (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+INSERT INTO `storedata` (`id`, `selected_person`, `numbers_from`, `numbers_to`, `date`) VALUES
+(1, 'Rose', 78899, 78999, '2022-08-23');
 
 
 --
@@ -57,7 +59,7 @@ CREATE TABLE `storedata` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`) VALUES
 (1, 'admin', 'hedenniskibe@gmail.com', '1234560000000000000');
-
+ 
 --
 -- Indexes for dumped tables
 --

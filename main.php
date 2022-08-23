@@ -11,8 +11,10 @@ $lastrow[0]++;
 
 
  date_default_timezone_set('Africa/Nairobi');
+   // NMK
     if(isset($_GET['arruy'])){
-    $data = explode (",", $_GET['arruy']);
+    
+    $data = explode (",", $_GET['arruy']); 
     $selectedPerson = $data[0];
     $fromNo = $data[1];
     $toNo = $data[2];
@@ -28,8 +30,27 @@ $lastrow[0]++;
     $fetchresult = mysqli_query($conn, $fetchsql);
     $lastrow = mysqli_fetch_array($fetchresult);
     header("Location: main.php");
-}
 
+    // TBI      
+} else if(isset($_GET['arruy2'])){
+    $data2 = explode (",", $_GET['arruy2']); 
+    $selectedPerson2 = $data2[0];
+    $fromNo2 = $data2[1];
+    $toNo2 = $data2[2];
+    $currenttime2 = time();
+    $currentdate2 = date("Y - m - d h:i", $currenttime2);
+    $sqltbi = "INSERT INTO `storedata`(`selected_person`, `numbers_from`, `numbers_to`, `date`) VALUES ('$selectedPerson2', '$fromNo2', '$toNo2', '$currentdate2' ) ";
+    $resulttbi = mysqli_query($conn, $sqltbi);
+    // adding $result to json file
+    $jsontbi = json_encode($resulttbi);
+    file_put_contents('./js/data.json', $jsontbi);
+    
+    // $fetchsqltbi = "SELECT MAX(numbers_to) FROM storedata";
+    // $fetchresult = mysqli_query($conn, $fetchsql);
+    // $lastrow = mysqli_fetch_array($fetchresult);
+    header("Location: main.php");
+
+}
 
 ?>
 
@@ -69,6 +90,7 @@ $lastrow[0]++;
                             <option value="Patrick Gitonga">Patrick Gitonga</option>
                             <option value="Cecilia">Cecilia</option>
                             <option value="Justus">Justus</option>
+                            <option value="TBI">TBI</option>
                     </select>        
             </div>
           <!-- buttons -->
@@ -105,13 +127,20 @@ $lastrow[0]++;
         let leo = new Date();
         let today = leo.toLocaleDateString('en-US', dateOptions);
         let saveBtn = document.getElementById("save-btn");
+        // NMK CALCULATIONS
         let totalCalc = {
           currentNumber:parseInt(lastrow), 
           calcNumber: 100          
         }
+        // TBI CALCULATIONS
+        let totalTbi = {
+          currentNumber:20000, 
+          calcNumber: 20000         
+        }
 
         let generatedRepo = "";
         let numberReport = document.getElementById("accession-report");
+        let tbiTotal = totalTbi.currentNumber + totalTbi.calcNumber;
         let total = totalCalc.currentNumber + totalCalc.calcNumber; 
         function generateNo() {
             let selectedValue = document.getElementById("person").value; 
@@ -119,21 +148,35 @@ $lastrow[0]++;
                 if (selectedValue === "--Select Person--") {
               alert ("You have not selected any person to assign to!");
 
-            } else {      
+            } else if(selectedValue === "TBI"){
+              generatedRepo += `<li> <span class = "selectedperson"> ${selectedValue}</span> has been assigned numbers from 
+              <span class = "currno">${totalTbi.currentNumber.toLocaleString()}</span> to <span class = "total">
+              ${tbiTotal.toLocaleString()}</span> on <span class = "today">${today}</span> </li>`;
+              numberReport.innerHTML = generatedRepo;
+            }
+            else {
               generatedRepo += `<li> <span class = "selectedperson"> ${selectedValue}</span> has been assigned numbers from 
               <span class = "currno">${totalCalc.currentNumber.toLocaleString()}</span> to <span class = "total">
               ${total.toLocaleString()}</span> on <span class = "today">${today}</span> </li>`;
               numberReport.innerHTML = generatedRepo;
+            }     
+              
             }
-        }
 
         saveBtn.addEventListener("click",function () {
               let selectedValue = document.getElementById("person").value;
               let arruy = [selectedValue, totalCalc.currentNumber, total];
+              let arruy2 = [selectedValue, totalTbi.currentNumber, tbiTotal];
               if (selectedValue === "--Select Person--") {
                 alert ("You have not selected any person to assign to!");
           
-              } else {
+              } else if(selectedValue === "TBI"){
+                let src2 = "main.php?arruy2=" + arruy2[0] + "," + arruy2[1]  + "," + arruy2[2];
+                window.location.href = src2;
+                console.log(arruy2);
+              }
+              
+              else {
               let src1 = "main.php?arruy=" + arruy[0] + "," + arruy[1]  + "," + arruy[2];
               window.location.href = src1;
               console.log(arruy);

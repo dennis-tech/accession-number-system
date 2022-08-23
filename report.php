@@ -19,10 +19,10 @@ $result =  mysqli_query($conn, $query);
     <h1>ACCESSIONED NUMBERS REPORT</h1>
     <!-- creating a table to display the data -->
     <!-- adding a table search option -->
-    <div class="search">
+    <!-- <div class="search">
         <input type="text" name="search" id="search" placeholder="Search.." autocomplete="off">
         <div class="result"></div>  
-    </div>
+    </div> -->
       
     
     
@@ -34,10 +34,11 @@ $result =  mysqli_query($conn, $query);
             <th>TO NUMBERS</th>
             <th>DATE</th>
         </tr>
+        
         <?php
         // looping through the data and displaying it in the table
         while($row = mysqli_fetch_array($result)){
-            echo "<tr >";
+            echo "<tr>";
             // here we are displaying the data in the table
             echo "<td class= 'tabletr'>".$row['id']."</td>";
             echo "<td class= 'tabletr'>".$row['selected_person']."</td>";
@@ -50,7 +51,16 @@ $result =  mysqli_query($conn, $query);
         
         
         echo "</table>";
+        // report.csv is the file that we are creating to store the data in csv format      
+        $file = fopen("report.csv","w");
+        // looping through the data and storing it in the csv file
+        while($row = mysqli_fetch_array($result)){
+            fputcsv($file,$row);
+        }
+        fclose($file);
+
         
+
 
         
         
@@ -61,7 +71,7 @@ $result =  mysqli_query($conn, $query);
     <!-- script tags src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous" -->
-    <script src="js/jquery.min.js" >
+    <script src="js/jquery.min.js">
         $(document).ready(function(){
                 $(".search").on("keyup input", function(){
                     
@@ -85,7 +95,11 @@ $result =  mysqli_query($conn, $query);
                     });
         });
     </script>
-
+    <div class="btn">
+        <a href='report.php' class='btn-btn' download='report.csv'>DOWNLOAD REPORT</a>
+        <a href='main.php' class='btn-btn' >GO BACK</a>
+    </div>
+    
         
 </body>
 </html>
