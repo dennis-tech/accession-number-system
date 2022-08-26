@@ -37,6 +37,7 @@ $result =  mysqli_query($conn, $query);
         
         <?php
         // looping through the data and displaying it in the table
+        $row_tmp = [];
         while($row = mysqli_fetch_array($result)){
             echo "<tr>";
             // here we are displaying the data in the table
@@ -46,26 +47,20 @@ $result =  mysqli_query($conn, $query);
             echo "<td class= 'tabletr'>".number_format($row['numbers_to'])."</td>";
             echo "<td class= 'tabletr'>".$row['date']."</td>";
             echo "</tr>";
+            $row_tmp = $row; // Put in the content to the $row_tmp
         }
         
         
         
         echo "</table>";
+        
         // report.csv is the file that we are creating to store the data in csv format      
         $file = fopen("report.csv","w");
-        // looping through the data and storing it in the csv file
-        while($row = mysqli_fetch_array($result)){
-            fputcsv($file,$row);
-        }
+        
+        // Put the content to the csv.
+        fputcsv($file,$row_tmp);
+
         fclose($file);
-
-        
-
-
-        
-        
-        
-
         ?>
     </table>
     <!-- script tags src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -96,7 +91,7 @@ $result =  mysqli_query($conn, $query);
         });
     </script>
     <div class="btn">
-        <a href='report.php' class='btn-btn' download='report.csv'>DOWNLOAD REPORT</a>
+        <a href='report.csv' class='btn-btn' download='report.csv'>DOWNLOAD REPORT</a>  <!-- Change the href to the report.csv IMPORTANT -->
         <a href='main.php' class='btn-btn' >GO BACK</a>
     </div>
     
